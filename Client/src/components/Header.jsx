@@ -11,7 +11,7 @@ import {
 } from "@mui/icons-material";
 
 const StyledAppbar = styled(AppBar)({
-  background: "#f3f3f3",
+  background: "#f6f8fc",
   boxShadow: "none",
 });
 const SearchBar = styled(Box)({
@@ -40,12 +40,12 @@ const OptionBar = styled(Box)({
   },
 });
 
-const Header = () => {
+const Header = ({ toggleDrawer }) => {
   return (
     <div>
       <StyledAppbar position="static" color="action">
         <Toolbar>
-          <MenuIcon />
+          <MenuIcon onClick={toggleDrawer} />
           <img
             src={gmaillogo}
             alt="gmail"
