@@ -46,7 +46,11 @@ const SideBarContent = () => {
           </ListItem>
         ))}
       </List>
-      <ComposeMail openDialog={openDialog} toggleDialog={toggleDialog} />
+      <ComposeMail
+        openDialog={openDialog}
+        toggleDialog={toggleDialog}
+        setOpenDialog={setOpenDialog}
+      />
     </Container>
   );
 };

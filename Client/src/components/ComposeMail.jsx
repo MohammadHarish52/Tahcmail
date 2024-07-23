@@ -8,6 +8,7 @@ import {
   TextField,
   Button,
 } from "@mui/material";
+import { useState } from "react";
 
 const dialogStyle = {
   height: "90%",
@@ -41,7 +42,38 @@ const TextAreaSection = styled(Box)({
   },
 });
 
-const ComposeMail = ({ openDialog, toggleDialog }) => {
+const ComposeMail = ({ openDialog, toggleDialog, setOpenDialog }) => {
+  const [data, setData] = useState({});
+
+  const config = {
+    Host: "smtp.elasticemail.com",
+    Username: process.env.REACT_APP_USERNAME,
+    Password: process.env.REACT_APP_PASSWORD,
+    Port: 2525,
+  };
+
+  const onValueChange = (e) => {
+    setData({ ...data, [e.target.name]: e.target.value });
+    console.log(data);
+  };
+
+  const sendMail = (e) => {
+    e.preventDefault();
+    if (window.Email) {
+      window.Email.send({
+        ...config,
+        To: data.to,
+        From: "xharish52@gmail.com",
+        Subject: data.subject,
+        Body: data.body,
+      }).then((message) => alert(message));
+    }
+    setOpenDialog(false);
+  };
+
+  const deleteMail = () => {
+    setOpenDialog(false);
+  };
   return (
     <Dialog
       open={openDialog}
@@ -54,11 +86,20 @@ const ComposeMail = ({ openDialog, toggleDialog }) => {
         <Close fontSize="small" onClick={toggleDialog} />
       </Header>
       <TextAreaSection>
-        <InputBase placeholder="To" />
-        <InputBase placeholder="Subject" />
+        <InputBase
+          placeholder="To"
+          name="to"
+          onChange={(e) => onValueChange(e)}
+        />
+        <InputBase
+          placeholder="Subject"
+          name="subject"
+          onChange={(e) => onValueChange(e)}
+        />
       </TextAreaSection>
       <Box>
         <TextField
+          name="body"
           multiline
           rows={20}
           sx={{
@@ -67,6 +108,7 @@ const ComposeMail = ({ openDialog, toggleDialog }) => {
               border: "none",
             },
           }}
+          onChange={(e) => onValueChange(e)}
         />
       </Box>
       <Box
@@ -92,11 +134,11 @@ const ComposeMail = ({ openDialog, toggleDialog }) => {
               color: "#fff",
             },
           }}
-          onClick={toggleDialog}
+          onClick={(e) => sendMail(e)}
         >
           Send
         </Button>
-        <DeleteOutline onClick={toggleDialog} />
+        <DeleteOutline onClick={() => deleteMail()} />
       </Box>
     </Dialog>
   );
