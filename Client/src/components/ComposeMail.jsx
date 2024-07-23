@@ -9,6 +9,8 @@ import {
   Button,
 } from "@mui/material";
 import { useState } from "react";
+import useApi from "../hooks/useApi";
+import { API_URLS } from "../services/api.url.js";
 
 const dialogStyle = {
   height: "90%",
@@ -44,6 +46,7 @@ const TextAreaSection = styled(Box)({
 
 const ComposeMail = ({ openDialog, toggleDialog, setOpenDialog }) => {
   const [data, setData] = useState({});
+  const sentEmailService = useApi(API_URLS.saveSentEmail);
 
   const config = {
     Host: "smtp.elasticemail.com",
@@ -68,6 +71,18 @@ const ComposeMail = ({ openDialog, toggleDialog, setOpenDialog }) => {
         Body: data.body,
       }).then((message) => alert(message));
     }
+    const payload = {
+      to: data.to,
+      from: "xharish52@gmail.com",
+      subject: data.subject,
+      body: data.body,
+      date: new Date(),
+      image: "",
+      name: "Harish",
+      starred: false,
+      type: "sent",
+    };
+    sentEmailService.call(payload);
     setOpenDialog(false);
   };
 
