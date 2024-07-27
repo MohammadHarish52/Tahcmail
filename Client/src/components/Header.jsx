@@ -1,6 +1,6 @@
 import { AppBar, Box, InputBase, styled, Toolbar } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import { gmaillogo } from "../constants/constant";
+import logo from "../../public/images/tachmail.png";
 import SearchIcon from "@mui/icons-material/Search";
 import TuneIcon from "@mui/icons-material/Tune";
 import {
@@ -47,10 +47,11 @@ const Header = ({ toggleDrawer }) => {
         <Toolbar>
           <MenuIcon onClick={toggleDrawer} />
           <img
-            src={gmaillogo}
+            src={logo}
             alt="gmail"
             style={{
-              width: 110,
+              width: 109,
+
               marginLeft: 15,
             }}
           />

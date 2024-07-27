@@ -50,8 +50,8 @@ const ComposeMail = ({ openDialog, toggleDialog, setOpenDialog }) => {
 
   const config = {
     Host: "smtp.elasticemail.com",
-    Username: process.env.REACT_APP_USERNAME,
-    Password: process.env.REACT_APP_PASSWORD,
+    Username: "harishdj89@yopmail.com",
+    Password: "B58BF822003F97506B6D04AC088B2701CD8C",
     Port: 2525,
   };
 
@@ -83,6 +83,11 @@ const ComposeMail = ({ openDialog, toggleDialog, setOpenDialog }) => {
       type: "sent",
     };
     sentEmailService.call(payload);
+    if (!sentEmailService.error) {
+      setOpenDialog(false);
+      setData({});
+      alert("Email sent successfully");
+    }
     setOpenDialog(false);
   };
 
