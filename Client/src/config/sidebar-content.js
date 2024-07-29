@@ -1,10 +1,10 @@
 import {
   Photo,
   StarBorder,
-  AccessTime,
   SendOutlined,
   InsertDriveFileOutlined,
   DeleteOutlineOutlined,
+  MailOutlineOutlined,
 } from "@mui/icons-material";
 export const SideBarData = [
   {
@@ -18,14 +18,14 @@ export const SideBarData = [
     icon: StarBorder,
   },
   {
-    name: "Snoozed",
-    title: "Snoozed",
-    icon: AccessTime,
-  },
-  {
     name: "Sent",
     title: "Sent",
     icon: SendOutlined,
+  },
+  {
+    name: "Drafts",
+    title: "Draft",
+    icon: InsertDriveFileOutlined,
   },
   {
     name: "bin",
@@ -35,6 +35,6 @@ export const SideBarData = [
   {
     name: "Allmail",
     title: "All Mail",
-    icon: InsertDriveFileOutlined,
+    icon: MailOutlineOutlined,
   },
 ];

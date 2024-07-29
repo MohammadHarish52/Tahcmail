@@ -3,4 +3,12 @@ export const API_URLS = {
     endpoint: "save",
     method: "POST",
   },
+  getEmails: {
+    endpoint: "emails",
+    method: "GET",
+  },
+  saveDraftEmail: {
+    endpoint: "save-draft",
+    method: "POST",
+  },
 };

@@ -51,7 +51,6 @@ const Header = ({ toggleDrawer }) => {
             alt="gmail"
             style={{
               width: 109,
-
               marginLeft: 15,
             }}
           />

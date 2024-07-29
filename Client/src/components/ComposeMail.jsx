@@ -44,9 +44,10 @@ const TextAreaSection = styled(Box)({
   },
 });
 
-const ComposeMail = ({ openDialog, toggleDialog, setOpenDialog }) => {
+const ComposeMail = ({ openDialog, setOpenDialog }) => {
   const [data, setData] = useState({});
   const sentEmailService = useApi(API_URLS.saveSentEmail);
+  const saveDraftEmail = useApi(API_URLS.saveDraftEmail);
 
   const config = {
     Host: "smtp.elasticemail.com",
@@ -94,6 +95,27 @@ const ComposeMail = ({ openDialog, toggleDialog, setOpenDialog }) => {
   const deleteMail = () => {
     setOpenDialog(false);
   };
+
+  const CloseMail = () => {
+    const payload = {
+      to: data.to,
+      from: "xharish52@gmail.com",
+      subject: data.subject,
+      body: data.body,
+      date: new Date(),
+      image: "",
+      name: "Harish",
+      starred: false,
+      type: "drafts",
+    };
+    saveDraftEmail.call(payload);
+    if (!saveDraftEmail.error) {
+      setOpenDialog(false);
+      setData({});
+      alert("Email sent successfully");
+    }
+    setOpenDialog(false);
+  };
   return (
     <Dialog
       open={openDialog}
@@ -103,7 +125,7 @@ const ComposeMail = ({ openDialog, toggleDialog, setOpenDialog }) => {
     >
       <Header>
         <Typography>New Message</Typography>
-        <Close fontSize="small" onClick={toggleDialog} />
+        <Close fontSize="small" onClick={CloseMail} />
       </Header>
       <TextAreaSection>
         <InputBase
