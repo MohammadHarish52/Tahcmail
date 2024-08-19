@@ -9,13 +9,15 @@ import {
   HelpOutlineOutlined,
   SettingsOutlined,
 } from "@mui/icons-material";
+import { useState } from "react";
 
 const StyledAppbar = styled(AppBar)({
   background: "#f6f8fc",
   boxShadow: "none",
 });
 const SearchBar = styled(Box)({
-  background: "#ebf0fb",
+  background: "#ebffec",
+
   marginLeft: 80,
   borderRadius: 16,
   minWidth: 690,
@@ -25,6 +27,9 @@ const SearchBar = styled(Box)({
   justifyContent: "space-between",
   alignItems: "center",
   padding: "0px 20px",
+  "&.Mui-focused": {
+    border: "2px solid #afdbc5",
+  },
   "& > div": {
     width: "100%",
     padding: "0 5px",
@@ -41,6 +46,7 @@ const OptionBar = styled(Box)({
 });
 
 const Header = ({ toggleDrawer }) => {
+  const [isFocused, setIsFocused] = useState(false);
   return (
     <div>
       <StyledAppbar position="static" color="action">
@@ -54,7 +60,11 @@ const Header = ({ toggleDrawer }) => {
               marginLeft: 15,
             }}
           />
-          <SearchBar>
+          <SearchBar
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => setIsFocused(false)}
+            className={isFocused ? "Mui-focused" : ""}
+          >
             <SearchIcon color="action" />
             <InputBase placeholder="Search Email" />
             <TuneIcon color="action" />
