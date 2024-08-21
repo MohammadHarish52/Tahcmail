@@ -4,8 +4,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const ConnectDb = () => {
-  const DB_URI =
-    "mongodb+srv://harish52:pd6686224@tachmail.150tzpy.mongodb.net/?retryWrites=true&w=majority&appName=tachmail";
+  const DB_URI = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@tachmail.150tzpy.mongodb.net/?retryWrites=true&w=majority&appName=tachmail`;
 
   if (!DB_URI) {
     console.error("No MongoDB URI provided.");

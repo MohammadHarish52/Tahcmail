@@ -5,7 +5,12 @@ import { routes } from "../routes/routes";
 import { API_URLS } from "../services/api.url";
 import useApi from "../hooks/useApi";
 
-const Email = ({ email, getselectedemails, setRefreshScreen }) => {
+const Email = ({
+  email,
+  getselectedemails,
+  setRefreshScreen,
+  setGetSelectedEmails,
+}) => {
   const navigate = useNavigate();
   const Wrapper = styled(Box)({
     padding: "0 0 0 10px",
@@ -30,12 +35,21 @@ const Email = ({ email, getselectedemails, setRefreshScreen }) => {
     setRefreshScreen((e) => !e);
   };
 
+  const onValueChnage = () => {
+    if (getselectedemails.includes(email._id)) {
+      setGetSelectedEmails((e) => e.filter((id) => id !== email._id));
+    } else {
+      setGetSelectedEmails((e) => [...e, email._id]);
+    }
+  };
+
   return (
     <Wrapper>
       <Checkbox
         size="small"
         style={{ marginRight: "10px" }}
         checked={getselectedemails.includes(email._id)}
+        onChange={() => onValueChnage()}
       />
       {email.starred ? (
         <Star

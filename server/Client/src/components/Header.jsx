@@ -17,7 +17,7 @@ const StyledAppbar = styled(AppBar)({
 });
 const SearchBar = styled(Box)({
   background: "#ebffec",
-
+  border: "1px solid #afdbc5",
   marginLeft: 80,
   borderRadius: 16,
   minWidth: 690,

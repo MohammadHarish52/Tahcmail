@@ -1,6 +1,9 @@
 import { ArrowBack, Delete } from "@mui/icons-material";
 import { Box, styled, Typography } from "@mui/material";
 import { useOutletContext, useLocation } from "react-router-dom";
+import { API_URLS } from "../services/api.url";
+import useApi from "../hooks/useApi";
+import { useState } from "react";
 
 const Container = styled(Box)({
   marginLeft: 15,
@@ -10,9 +13,19 @@ const Container = styled(Box)({
 
 const ViewEmail = () => {
   const { openDrawer } = useOutletContext();
+  const [refresh, setRefresh] = useState(false);
+
+  const moveEmailToBinService = useApi(API_URLS.saveBinEmail);
 
   const { state } = useLocation();
   const { email } = state;
+
+  const deleteEmail = () => {
+    moveEmailToBinService.call([email._id]).then(() => {
+      setRefresh(!refresh); // Trigger re-render
+      window.history.back();
+    });
+  };
   return (
     <Box
       style={
@@ -27,7 +40,12 @@ const ViewEmail = () => {
           color="action"
           size="small"
         />
-        <Delete color="action" size="small" sx={{ marginLeft: "38px" }} />
+        <Delete
+          color="action"
+          size="small"
+          sx={{ marginLeft: "38px" }}
+          onClick={() => deleteEmail()}
+        />
       </Box>
       <Typography
         sx={{ fontSize: "22px", margin: "10px 0px 20px 75px", display: "flex" }}

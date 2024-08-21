@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8000";
+const API_URL = "";
 
 const API_TACHMAIL = async (urlObject, payload, type) => {
   return await axios({
