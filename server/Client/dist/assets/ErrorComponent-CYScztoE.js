@@ -1,0 +1,1 @@
+import{u as e,j as r,B as s,T as t}from"./index-lwF56xyP.js";const a=()=>{const o=e();return console.log(o),r.jsx(s,{style:{marginLeft:250},children:r.jsx(t,{children:"Error loading the page"})})};export{a as default};
