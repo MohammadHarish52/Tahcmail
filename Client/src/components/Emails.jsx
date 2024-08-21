@@ -61,6 +61,7 @@ const Emails = () => {
               key={item._id}
               email={item}
               getselectedemails={getselectedemails}
+              setRefreshScreen={setRefreshScreen}
             />
           ))}
         </List>

@@ -1,9 +1,11 @@
-import { StarBorder } from "@mui/icons-material";
+import { Star, StarBorder } from "@mui/icons-material";
 import { Box, Checkbox, styled, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { routes } from "../routes/routes";
+import { API_URLS } from "../services/api.url";
+import useApi from "../hooks/useApi";
 
-const Email = ({ email, getselectedemails }) => {
+const Email = ({ email, getselectedemails, setRefreshScreen }) => {
   const navigate = useNavigate();
   const Wrapper = styled(Box)({
     padding: "0 0 0 10px",
@@ -21,6 +23,13 @@ const Email = ({ email, getselectedemails }) => {
     },
   });
 
+  const toggledStarServive = useApi(API_URLS.getStarredEmail);
+
+  const toggleStaremail = () => {
+    toggledStarServive.call({ id: email._id, value: !email.starred });
+    setRefreshScreen((e) => !e);
+  };
+
   return (
     <Wrapper>
       <Checkbox
@@ -28,7 +37,20 @@ const Email = ({ email, getselectedemails }) => {
         style={{ marginRight: "10px" }}
         checked={getselectedemails.includes(email._id)}
       />
-      <StarBorder fontSize="small" style={{ marginRight: "10px" }} />
+      {email.starred ? (
+        <Star
+          fontSize="small"
+          style={{ marginRight: "10px", color: "yellowgreen" }}
+          onClick={() => toggleStaremail()}
+        />
+      ) : (
+        <StarBorder
+          fontSize="small"
+          style={{ marginRight: "10px" }}
+          onClick={() => toggleStaremail()}
+        />
+      )}
+
       <Box
         onClick={() => navigate(routes.view.path, { state: { email: email } })}
       >

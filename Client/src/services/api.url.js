@@ -15,4 +15,8 @@ export const API_URLS = {
     endpoint: "bin",
     method: "POST",
   },
+  getStarredEmail: {
+    endpoint: "starred",
+    method: "POST",
+  },
 };
